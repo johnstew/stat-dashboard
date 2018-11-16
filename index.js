@@ -16,12 +16,25 @@ app.prepare().then(() => {
 
   server.use(bodyParser.json());
 
+  server.get('/dashboard', (req, res) => res.redirect('/'));
+
   server.post('/dashboard', (req, res) => {
     const body = req.body;
     if (!body) return res.json({ status: 'ERROR', message: 'No data sent.' });
     const randomId = shortid.generate();
     tempStore[randomId] = req.body;
     return res.json({ status: 'OK', id: randomId });
+  });
+
+  server.delete('/dashboard', (req, res) => {
+    try {
+      const dashboardId = req.body.id || null;
+      delete tempStore[dashboardId];
+      return res.json({ status: 'OK', message: `Deleted ${dashboardId} from temp store.` });
+    } catch (error) {
+      console.error(error);
+      return res.json({ status: 'OK', message: `Delete error occured.` });
+    }
   });
 
   server.get('/dashboard/:id/json', (req, res) => {

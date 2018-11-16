@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -9,6 +10,11 @@ const styles = theme => ({
     background: '#e2e2e2'
   },
   saveFab: {
+    position: 'fixed',
+    bottom: theme.spacing.unit * 14,
+    right: theme.spacing.unit * 4
+  },
+  deleteFab: {
     position: 'fixed',
     bottom: theme.spacing.unit * 4,
     right: theme.spacing.unit * 4
@@ -21,10 +27,12 @@ class App extends React.Component {
 
     this.handleStatUpdate = this.handleStatUpdate.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   state = {
-    statCards: this.props.initDashboard ? [...this.props.initDashboard] : []
+    statCards: this.props.initDashboard ? [...this.props.initDashboard] : [],
+    dashboardId: ''
   };
 
   static processStatData(data, stat) {
@@ -73,6 +81,24 @@ class App extends React.Component {
       });
       const json = await res.json();
       window.history.replaceState({}, '', `/dashboard/${json.id}`);
+      this.setState({ dashboardId: json.id });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async handleDelete() {
+    try {
+      await fetch(`/dashboard`, {
+        method: 'delete',
+        body: JSON.stringify({ id: this.state.dashboardId }),
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      });
+      this.setState({ statCards: [], dashboardId: '' }, () => {
+        window.history.replaceState({}, '', '/');
+      });
     } catch (error) {
       console.error(error);
     }
@@ -89,6 +115,9 @@ class App extends React.Component {
         })}
         <Button variant="fab" color="primary" className={classes.saveFab} onClick={this.handleSave}>
           <SaveIcon />
+        </Button>
+        <Button variant="fab" color="secondary" className={classes.deleteFab} onClick={this.handleDelete}>
+          <DeleteIcon />
         </Button>
       </div>
     );
