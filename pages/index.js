@@ -3,6 +3,7 @@ import App from '../components/App';
 import StatDropDown from '../components/StatDropDown';
 import StatCard from '../components/StatCard';
 import StatContainer from '../components/StatContainer';
+// import HomeRunCard from '../components/HomeRunCard';
 import shortid from 'shortid';
 
 export default class Index extends Component {

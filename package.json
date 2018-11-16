@@ -20,7 +20,8 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-jss": "^8.6.1",
-    "shortid": "^2.2.14"
+    "shortid": "^2.2.14",
+    "three": "^0.98.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
