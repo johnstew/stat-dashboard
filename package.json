@@ -1,0 +1,33 @@
+{
+  "name": "stat-dashboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+    "dev": "node --inspect index.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.5.1",
+    "@material-ui/icons": "^3.0.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jss": "^9.8.7",
+    "lodash.isempty": "^4.4.0",
+    "next": "^7.0.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-jss": "^8.6.1",
+    "shortid": "^2.2.14"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "prettier": "^1.15.2"
+  }
+}
